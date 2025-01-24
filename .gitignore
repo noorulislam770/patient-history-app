@@ -1,0 +1,8 @@
+old_front/
+frontend1/node_modules
+frontend1/dist
+frontend1/.vscode
+
+backend/patients/.pytest_cache
+backend/patients/pat__pycache__
+backend/patients/*.egg-info
