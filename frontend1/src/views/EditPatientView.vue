@@ -17,28 +17,18 @@
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
               <label class="block text-sm font-medium text-gray-700">Name *</label>
-              <input
-                v-model="patient.name"
-                type="text"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.name" type="text" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Age *</label>
-              <input
-                v-model="patient.age"
-                type="number"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.age" type="number" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Gender</label>
-              <select
-                v-model="patient.gender"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <select v-model="patient.gender"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 <option v-if="!patient.gender == ''" value="">Select Gender</option>
                 <option v-if="patient.gender == 'male'" value="male">Male</option>
                 <option v-if="patient.gender == 'female'" value="female">Female</option>
@@ -48,74 +38,45 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700">S/D/W of, Self</label>
-              <input
-                v-model="patient.guardianName"
-                type="text"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.guardian_name" type="text" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Profession</label>
-              <input
-                v-model="patient.profession"
-                type="text"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.profession" type="text" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Referred By</label>
-              <input
-                v-model="patient.referred_by"
-                type="text"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.referred_by" type="text" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
 
 
             <div class="md:col-span-2">
               <label class="block text-sm font-medium text-gray-700">Address *</label>
-              <textarea
-                v-model="patient.address"
-                required
-                rows="2"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              ></textarea>
+              <textarea v-model="patient.address" required rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Mobile No. *</label>
-              <input
-                v-model="patient.mobile_no"
-                type="tel"
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.mobile_no" type="tel" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                v-model="patient.email"
-                type="email"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.email" type="email"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Profession</label>
-              <input
-                v-model="patient.profession"
-                type="text"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.profession" type="text"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Referred By</label>
-              <input
-                v-model="patient.referred_by"
-                type="text"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
+              <input v-model="patient.referred_by" type="text"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
           </div>
         </div>
@@ -126,38 +87,26 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700">Current dental concerns</label>
-              <textarea
-                v-model="patient.dental_concerns"
-                rows="2"
+              <textarea v-model="patient.dental_concerns" rows="2"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Are you aware of any particular trouble with your teeth or gums now?"
-              ></textarea>
+                placeholder="Are you aware of any particular trouble with your teeth or gums now?"></textarea>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Discomfort of Pain</label>
-              <textarea
-                v-model="patient.discomfort_of_pain"
-                rows="2"
+              <textarea v-model="patient.discomfort_of_pain" rows="2"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Are you having any discomfort of pain?"
-              ></textarea>
+                placeholder="Are you having any discomfort of pain?"></textarea>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Last dental examination</label>
-                <input
-                  v-model="patient.last_dental_exam"
-                  type="date"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
+                <input v-model="patient.last_dental_exam" type="date"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Last dental X-ray</label>
-                <input
-                  v-model="patient.last_dental_xray"
-                  type="date"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
+                <input v-model="patient.last_dental_xray" type="date"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
               </div>
             </div>
           </div>
@@ -170,19 +119,13 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Current medications</label>
-                <input
-                  v-model="patient.medications"
-                  type="text"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
+                <input v-model="patient.medications" type="text"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Physician's name</label>
-                <input
-                  v-model="patient.physician_name"
-                  type="text"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
+                <input v-model="patient.physician_name" type="text"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
               </div>
             </div>
 
@@ -203,17 +146,16 @@
                   <span class="text-sm">High Blood Pressure</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="checkbox" v-model="patient.hepatitis" class="rounded text-blue-600" @change="showHepatitisDropdown = patient.hepatitis">
+                  <input type="checkbox" v-model="patient.hepatitis" class="rounded text-blue-600"
+                    @change="showHepatitisDropdown = patient.hepatitis">
                   <span class="text-sm">Hepatitis</span>
                 </label>
 
                 <!-- Hepatitis Dropdown -->
                 <div v-if="showHepatitisDropdown" class="md:col-span-2">
                   <label class="block text-sm font-medium text-gray-700">Hepatitis Type</label>
-                  <select
-                    v-model="patient.hepatitis_type"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  >
+                  <select v-model="patient.hepatitis_type"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     <option value="">Select type</option>
                     <option value="A">Hepatitis A</option>
                     <option value="B">Hepatitis B</option>
@@ -234,11 +176,8 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700">Allergies</label>
-              <textarea
-                v-model="patient.allergies"
-                rows="2"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              ></textarea>
+              <textarea v-model="patient.allergies" rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
             </div>
 
             <!-- Pregnancy Question -->
@@ -263,12 +202,11 @@
         <div class="text-center space-y-4">
           <p class="text-sm text-gray-600">
             This Personal information is to help us do our best in maintaining your Smile, comfort and ability to chew.
-            This information is, of course, confidential and we consider it a privilege to be given the opportunity to take care of you.
+            This information is, of course, confidential and we consider it a privilege to be given the opportunity to
+            take care of you.
           </p>
-          <button
-            type="submit"
-            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
+          <button type="submit"
+            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Update Patient
           </button>
         </div>

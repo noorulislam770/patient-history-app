@@ -11,7 +11,7 @@ class Patient(models.Model):
     email = models.EmailField()
     profession = models.CharField(max_length=255)
     referred_by = models.CharField(max_length=255)
-
+    guardian_name = models.CharField(max_length=255, blank=True)
     # Dental History
     dental_concerns = models.TextField(blank=True)
     discomfort_of_pain = models.TextField(blank=True)

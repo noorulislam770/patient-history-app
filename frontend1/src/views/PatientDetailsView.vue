@@ -19,43 +19,56 @@
         <p>{{ error }}</p>
       </div>
 
-      <!-- Patient Details -->
-      <div v-if="!loading && !error" class="space-y-6">
+      <!-- Patient Details Form (Read-Only) -->
+      <form v-if="!loading && !error" class="space-y-6">
         <!-- Essential Information Card -->
         <div class="bg-white shadow rounded-lg p-6">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Essential Information</h2>
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <label class="block text-sm font-medium text-gray-700">Name</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.name }}</p>
+              <label class="block text-sm font-medium text-gray-700">Name *</label>
+              <input v-model="patient.name" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700">Age</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.age }}</p>
+              <label class="block text-sm font-medium text-gray-700">Age *</label>
+              <input v-model="patient.age" type="number" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Gender</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.gender }}</p>
+              <input v-model="patient.gender" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700">Profession</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.profession }}</p>
+              <label class="block text-sm font-medium text-gray-700">S/D/W of, Self </label>
+              <input v-model="patient.guardian_name" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700">Referred By</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.referred_by }}</p>
+              <label class="block text-sm font-medium text-gray-700">Profession </label>
+              <input v-model="patient.profession" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Referred By </label>
+              <input v-model="patient.referred_by" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700">Address</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.address }}</p>
+              <label class="block text-sm font-medium text-gray-700">Address *</label>
+              <textarea v-model="patient.address" readonly rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700">Mobile No.</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.mobile_no }}</p>
+              <label class="block text-sm font-medium text-gray-700">Mobile No. *</label>
+              <input v-model="patient.mobile_no" type="tel" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Email</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.email }}</p>
+              <input v-model="patient.email" type="email" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
             </div>
           </div>
         </div>
@@ -66,15 +79,25 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700">Current dental concerns</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.dentalConcerns }}</p>
+              <textarea v-model="patient.dentalConcerns" readonly rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700">Last dental examination</label>
-              <p class="mt-1 text-sm text-gray-900">{{ formatDate(patient.lastExamination) }}</p>
+              <label class="block text-sm font-medium text-gray-700">Discomfort of Pain</label>
+              <textarea v-model="patient.discomfortOfPain" readonly rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Last dental X-ray</label>
-              <p class="mt-1 text-sm text-gray-900">{{ formatDate(patient.lastXray) }}</p>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Last dental examination</label>
+                <input v-model="patient.lastExamination" type="date" readonly
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Last dental X-ray</label>
+                <input v-model="patient.lastXray" type="date" readonly
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+              </div>
             </div>
           </div>
         </div>
@@ -83,41 +106,83 @@
         <div class="bg-white shadow rounded-lg p-6">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Medical History</h2>
           <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Current medications</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.medications }}</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Physician's name</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.physicianName }}</p>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Current medications</label>
+                <input v-model="patient.medications" type="text" readonly
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Physician's name</label>
+                <input v-model="patient.physicianName" type="text" readonly
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+              </div>
             </div>
 
-            <!-- Medical Conditions -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Medical Conditions</label>
-              <div class="mt-1 text-sm text-gray-900">
-                <p v-if="patient.diabetes">Diabetes</p>
-                <p v-if="patient.tuberculosis">Tuberculosis</p>
-                <p v-if="patient.bloodPressure">High Blood Pressure</p>
-                <p v-if="patient.hepatitis">Hepatitis (Type: {{ patient.hepatitisType }})</p>
-                <p v-if="patient.rheumatic_fever">Rheumatic Fever</p>
-                <p v-if="patient.excessive_bleeding">Excessive Bleeding</p>
+            <!-- Medical Conditions Checkboxes -->
+            <div class="space-y-3">
+              <h3 class="text-sm font-medium text-gray-700">Medical Conditions</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.diabetes" disabled class="rounded text-blue-600">
+                  <span class="text-sm">Diabetes</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.tuberculosis" disabled class="rounded text-blue-600">
+                  <span class="text-sm">Tuberculosis</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.bloodPressure" disabled class="rounded text-blue-600">
+                  <span class="text-sm">High Blood Pressure</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.hepatitis" disabled class="rounded text-blue-600">
+                  <span class="text-sm">Hepatitis</span>
+                  <span v-if="patient.hepatitis_type"> ({{ patient.hepatitis_type }})</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.rheumatic_fever" disabled class="rounded text-blue-600">
+                  <span class="text-sm">Rheumatic Fever</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" v-model="patient.excessive_bleeding" disabled class="rounded text-blue-600">
+                  <span class="text-sm">Excessive Bleeding</span>
+                </label>
               </div>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700">Allergies</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.allergies }}</p>
+              <textarea v-model="patient.allergies" readonly rows="2"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
 
-            <!-- Pregnancy Status -->
-            <div v-if="patient.gender === 'female'">
-              <label class="block text-sm font-medium text-gray-700">Pregnancy Status</label>
-              <p class="mt-1 text-sm text-gray-900">{{ patient.isPregnant ? 'Yes' : 'No' }}</p>
+            <!-- Pregnancy Question -->
+            <div class="border-t pt-4">
+              <label class="block text-sm font-medium text-gray-700 mb-2">For females only:</label>
+              <div class="flex items-center space-x-4">
+                <span class="text-sm">Are you pregnant?</span>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" v-model="patient.is_pregnant" :value="true" disabled class="text-blue-600">
+                  <span class="text-sm">Yes</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" v-model="patient.is_pregnant" :value="false" disabled class="text-blue-600">
+                  <span class="text-sm">No</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Edit Button -->
+        <div class="text-center">
+          <button type="button" @click="goToEditPage"
+            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Edit Patient
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -140,14 +205,16 @@ export default {
         lastXray: '',
         medications: '',
         physicianName: '',
+        hepatitis_type: '',
         diabetes: false,
         tuberculosis: false,
         bloodPressure: false,
         hepatitis: false,
         rheumatic_fever: false,
         excessive_bleeding: false,
+
         allergies: '',
-        isPregnant: null,
+        is_pregnant: null,
       },
       loading: true,
       error: null,
@@ -158,6 +225,7 @@ export default {
     try {
       const response = await this.$axios.get(`/api/patients/${patientId}/`);
       this.patient = response.data;
+      console.log(this.patient);
     } catch (error) {
       console.error('Error fetching patient:', error);
       this.error = 'Failed to load patient data';
@@ -166,13 +234,8 @@ export default {
     }
   },
   methods: {
-    formatDate(dateString) {
-      if (!dateString) return 'Not available';
-      return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
+    goToEditPage() {
+      this.$router.push(`/patients/${this.$route.params.id}/edit`);
     },
   },
 };
