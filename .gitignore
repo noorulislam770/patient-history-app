@@ -5,4 +5,3 @@ frontend1/.vscode
 
 backend/patients/.pytest_cache
 backend/patients/pat__pycache__
-backend/patients/*.egg-info
