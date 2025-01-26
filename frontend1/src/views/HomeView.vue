@@ -6,7 +6,7 @@
         <!-- Left Content -->
         <div class="lg:w-1/2 z-10 items-center">
           <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            IDC Dental Care Clinic
+            Dot Dentistry - Dental Care
           </h1>
           <p class="text-gray-600 mb-8">
             Portal for Patient Management System

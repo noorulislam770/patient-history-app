@@ -13,8 +13,16 @@
       <form @submit.prevent="handleSubmit" class="space-y-6">
         <!-- Essential Information Card -->
         <div class="bg-white shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Essential Information</h2>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mb-2">
+            <h2 class="text-xl font-semibold text-gray-800 mt-5">Essential Information</h2>
+            <div>
+              <label class="block text-sm font-small text-gray-700">Patient Entry Date</label>
+              <input v-model="form.entry_date" type="date" required
+                class="mt-0 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500">
+            </div>
+          </div>
+          <hr>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mt-2">
             <div>
               <label class="block text-sm font-medium text-gray-700">Name *</label>
               <input v-model="form.name" type="text" required
@@ -67,6 +75,7 @@
               <input v-model="form.email" type="email"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500">
             </div>
+
           </div>
         </div>
 
@@ -218,7 +227,7 @@ export default {
         gender: '',
         profession: '',
         referred_by: '',
-
+        entry_date: new Date().toISOString().split('T')[0],
         // Dental History
         dentalConcerns: '',
         lastExamination: '',
