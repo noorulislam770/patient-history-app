@@ -57,7 +57,8 @@
             <div class="mb-4">
               <ClockIcon class="w-8 h-8 text-gray-800" />
             </div>
-            <h3 class="font-semibold text-gray-700 mb-4">OPENING HOURS</h3>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Appointment Calander</h2>
+            <h3 class="font-semibold text-gray-700 mb-4">Setup Future Appointments</h3>
             <div class="text-gray-600 mb-2">Monday - Friday</div>
             <div class="text-gray-600 mb-6">Saturday - Sunday</div>
             <button class="bg-white px-6 py-2 rounded-full text-gray-800 hover:shadow-lg transition duration-300">

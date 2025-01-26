@@ -1,33 +1,37 @@
 <template>
-  <div class="container mx-4 px-4 py-8">
-    <h2 class="text-2xl font-bold mb-6">Patient List</h2>
-    <SearchBar @search="handleSearch" /> <!-- Listen for the search event -->
-    <div v-if="loading" class="text-center">
-      <p class="text-xl">Loading patients...</p>
+  <div class="container px-8 py-8">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Patient List</h2>
+    <SearchBar @search="handleSearch" class="mb-8" /> <!-- Listen for the search event -->
+
+    <div v-if="loading" class="text-center py-12">
+      <p class="text-xl text-gray-600">Loading patients...</p>
     </div>
-    <div v-else-if="patients.length === 0" class="text-center">
-      <p class="text-xl">No patients found.</p>
+
+    <div v-else-if="patients.length === 0" class="text-center py-12">
+      <p class="text-xl text-gray-600">No patients found.</p>
     </div>
-    <div v-else class="bg-white shadow-md rounded-lg overflow-hidden">
+
+    <div v-else class="bg-white shadow-lg rounded-lg overflow-hidden">
       <table class="w-full">
         <thead>
-          <tr class="bg-gray-100 text-left">
-            <th class="py-3 px-4 font-semibold">Name</th>
-            <th class="py-3 px-4 font-semibold">Age</th>
-            <th class="py-3 px-4 font-semibold">Gender</th>
-            <th class="py-3 px-4 font-semibold">Mobile No.</th>
-            <th class="py-3 px-4 font-semibold">Actions</th>
+          <tr class="bg-gray-50 text-left text-gray-700">
+            <th class="py-4 px-6 font-semibold uppercase text-sm">Name</th>
+            <th class="py-4 px-6 font-semibold uppercase text-sm">Age</th>
+            <th class="py-4 px-6 font-semibold uppercase text-sm">Gender</th>
+            <th class="py-4 px-6 font-semibold uppercase text-sm">Mobile No.</th>
+            <th class="py-4 px-6 font-semibold uppercase text-sm">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="patient in patients" :key="patient.id" class="border-t border-gray-200 hover:bg-gray-50">
-
-            <td class="py-3 px-4">{{ patient.name }}</td>
-            <td class="py-3 px-4">{{ patient.age }}</td>
-            <td class="py-3 px-4">{{ patient.gender }}</td>
-            <td class="py-3 px-4">{{ patient.mobile_no || 'N/A' }}</td>
-            <td class="py-3 px-4">
-              <router-link :to="`/patients/${patient.id}`" class="text-blue-500 hover:text-blue-700 transition-colors">
+          <tr v-for="patient in patients" :key="patient.id"
+            class="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <td class="py-4 px-6 text-gray-800">{{ patient.name }}</td>
+            <td class="py-4 px-6 text-gray-700">{{ patient.age }}</td>
+            <td class="py-4 px-6 text-gray-700">{{ patient.gender }}</td>
+            <td class="py-4 px-6 text-gray-700">{{ patient.mobile_no || 'N/A' }}</td>
+            <td class="py-4 px-6">
+              <router-link :to="`/patients/${patient.id}`"
+                class="text-blue-500 hover:text-blue-700 transition-colors font-semibold">
                 View Details
               </router-link>
             </td>
@@ -75,3 +79,7 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Optional: Add custom styles if needed */
+</style>

@@ -2,10 +2,8 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Patient
-from .serializers import PatientSerializer
-from .models import Appointment
-from .serializers import AppointmentSerializer
+from .models import Patient, Procedure, Appointment
+from .serializers import PatientSerializer, AppointmentSerializer, ProcedureSerializer
 
 
 class PatientCreateView(APIView):
@@ -61,3 +59,19 @@ class PatientViewSet(viewsets.ModelViewSet):
 class AppointmentViewSet(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
+
+
+class ProcedureViewSet(viewsets.ModelViewSet):
+    queryset = Procedure.objects.all()
+    serializer_class = ProcedureSerializer
+
+    def get_queryset(self):
+        patient_id = self.request.query_params.get('patient_id')
+        if patient_id:
+            patient = Patient.objects.get(id=patient_id)
+            procedure = Procedure.objects.filter(patient_id=patient_id)
+            # print(procedure)
+            return procedure
+        elif not patient_id:
+            return Procedure.objects.all().order_by('-date')
+        # return Patient.objects.all()

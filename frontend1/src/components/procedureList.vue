@@ -54,7 +54,8 @@
     </div>
 
     <!-- Add/Edit Procedure Modal -->
-    <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div v-if="isModalOpen" style="z-index: 1;"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-xl font-bold">{{ isEditing ? 'Edit Procedure' : 'Add Procedure' }} </h2>
