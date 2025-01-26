@@ -1,10 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import AboutView from '../views/AboutView.vue';
-import PatientListView from '../views/PatientListView.vue';
-import AddPatientView from '../views/AddPatientView.vue';
-import EditPatientView from '../views/EditPatientView.vue';
-import PatientDetailsView from '../views/PatientDetailsView.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import PatientListView from '../views/PatientListView.vue'
+import AddPatientView from '../views/AddPatientView.vue'
+import EditPatientView from '../views/EditPatientView.vue'
+import PatientDetailsView from '../views/PatientDetailsView.vue'
+import ProcedureDetailsView from '../views/ProcedureDetailsView.vue'
 
 const routes = [
   {
@@ -37,11 +38,16 @@ const routes = [
     name: 'edit-patient',
     component: EditPatientView,
   },
-];
+  {
+    path: '/patients/:patientId/procedures/:procedureId',
+    name: 'procedure-details',
+    component: ProcedureDetailsView,
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router

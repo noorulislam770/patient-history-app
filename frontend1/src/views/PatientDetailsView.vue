@@ -188,12 +188,20 @@
           </button>
         </div>
       </form>
+      <ProcedureList :patientId="patient.id" :patientName="patient.name" />
     </div>
   </div>
+
 </template>
 
 <script>
+import ProcedureList from '@/components/procedureList.vue';
+
+
 export default {
+  components: {
+    ProcedureList,
+  },
   data() {
     return {
       patient: {
