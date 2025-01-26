@@ -12,6 +12,7 @@
       <!-- Form -->
       <form @submit.prevent="submitForm" class="space-y-6">
         <!-- Essential Information Card -->
+        <input type="hidden" v-model="patient.id" />
         <div class="bg-white shadow rounded-lg p-6">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Essential Information</h2>
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -29,7 +30,7 @@
               <label class="block text-sm font-medium text-gray-700">Gender</label>
               <select v-model="patient.gender"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                <option v-if="!patient.gender == ''" value="">Select Gender</option>
+                <option v-if="patient.gender == ''" value="">Select Gender</option>
                 <option v-if="patient.gender == 'male'" value="male">Male</option>
                 <option v-if="patient.gender == 'female'" value="female">Female</option>
                 <option v-if="patient.gender == 'other'" value="other">Other</option>
@@ -68,16 +69,7 @@
               <input v-model="patient.email" type="email"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Profession</label>
-              <input v-model="patient.profession" type="text"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Referred By</label>
-              <input v-model="patient.referred_by" type="text"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-            </div>
+
           </div>
         </div>
 
@@ -221,6 +213,7 @@ export default {
     return {
       patient: {
         // Essential Information
+        id: '',
         name: '',
         age: '',
         gender: '',
@@ -268,8 +261,8 @@ export default {
       try {
         const patientId = this.$route.params.id;
         await this.$axios.put(`/api/patients/${patientId}/`, this.patient);
-        alert('Patient updated successfully!');
-        this.$router.push('/patients'); // Redirect to patient list
+        // alert('Patient updated successfully!');
+        this.$router.push(`/patients/${patientId}`); // Redirect to patient list
       } catch (error) {
         console.error('Error updating patient:', error);
         alert('Failed to update patient.');

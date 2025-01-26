@@ -1,6 +1,7 @@
 <template>
   <div class="container mx-4 px-4 py-8">
     <h2 class="text-2xl font-bold mb-6">Patient List</h2>
+    <SearchBar @search="handleSearch" /> <!-- Listen for the search event -->
     <div v-if="loading" class="text-center">
       <p class="text-xl">Loading patients...</p>
     </div>
@@ -20,6 +21,7 @@
         </thead>
         <tbody>
           <tr v-for="patient in patients" :key="patient.id" class="border-t border-gray-200 hover:bg-gray-50">
+
             <td class="py-3 px-4">{{ patient.name }}</td>
             <td class="py-3 px-4">{{ patient.age }}</td>
             <td class="py-3 px-4">{{ patient.gender }}</td>
@@ -37,23 +39,39 @@
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar.vue';
+
 export default {
+  components: {
+    SearchBar,
+  },
   data() {
     return {
-      patients: [],
-      loading: true,
-    }
+      patients: [], // Holds the list of patients
+      loading: true, // Loading state
+    };
   },
   async created() {
-    try {
-      const response = await this.$axios.get('/api/patients/')
-      this.patients = response.data
-      console.log(this.patients)
-    } catch (error) {
-      console.error('Error fetching patients:', error)
-    } finally {
-      this.loading = false
-    }
+    // Fetch all patients when the component is created
+    await this.fetchPatients();
   },
-}
+  methods: {
+    async fetchPatients(query = '') {
+      this.loading = true;
+      try {
+        const response = await this.$axios.get('/api/patients/', {
+          params: { query }, // Pass the search query to the backend
+        });
+        this.patients = response.data; // Update the patients list
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    handleSearch(results) {
+      this.patients = results; // Update the patients list with search results
+    },
+  },
+};
 </script>

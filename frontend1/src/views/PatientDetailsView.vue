@@ -79,23 +79,23 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700">Current dental concerns</label>
-              <textarea v-model="patient.dentalConcerns" readonly rows="2"
+              <textarea v-model="patient.dental_concerns" readonly rows="2"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Discomfort of Pain</label>
-              <textarea v-model="patient.discomfortOfPain" readonly rows="2"
+              <textarea v-model="patient.discomfort_of_pain" readonly rows="2"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"></textarea>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Last dental examination</label>
-                <input v-model="patient.lastExamination" type="date" readonly
+                <input v-model="patient.last_dental_exam" type="date" readonly
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Last dental X-ray</label>
-                <input v-model="patient.lastXray" type="date" readonly
+                <input v-model="patient.last_dental_xray" type="date" readonly
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
               </div>
             </div>
@@ -114,7 +114,7 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Physician's name</label>
-                <input v-model="patient.physicianName" type="text" readonly
+                <input v-model="patient.physician_name" type="text" readonly
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
               </div>
             </div>
@@ -132,13 +132,13 @@
                   <span class="text-sm">Tuberculosis</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="checkbox" v-model="patient.bloodPressure" disabled class="rounded text-blue-600">
+                  <input type="checkbox" v-model="patient.high_blood_pressure" disabled class="rounded text-blue-600">
                   <span class="text-sm">High Blood Pressure</span>
                 </label>
                 <label class="flex items-center space-x-2">
                   <input type="checkbox" v-model="patient.hepatitis" disabled class="rounded text-blue-600">
                   <span class="text-sm">Hepatitis</span>
-                  <span v-if="patient.hepatitis_type"> ({{ patient.hepatitis_type }})</span>
+                  <span v-if="patient.hepatitis && patient.hepatitis_type"> ({{ patient.hepatitis_type }})</span>
                 </label>
                 <label class="flex items-center space-x-2">
                   <input type="checkbox" v-model="patient.rheumatic_fever" disabled class="rounded text-blue-600">
@@ -200,15 +200,15 @@ export default {
         gender: '',
         profession: '',
         referred_by: '',
-        dentalConcerns: '',
-        lastExamination: '',
-        lastXray: '',
+        dental_concerns: '',
+        last_dental_exam: '',
+        last_dental_xray: '',
         medications: '',
         physicianName: '',
         hepatitis_type: '',
         diabetes: false,
         tuberculosis: false,
-        bloodPressure: false,
+        high_blood_pressure: false,
         hepatitis: false,
         rheumatic_fever: false,
         excessive_bleeding: false,
@@ -219,6 +219,13 @@ export default {
       loading: true,
       error: null,
     };
+  },
+  watch: {
+    // Watch for changes in the route parameter `:id`
+    '$route.params.id': {
+      handler: 'fetchPatientData', // Call `fetchPatientData` when `:id` changes
+      immediate: true, // Trigger the handler immediately on component creation
+    },
   },
   async created() {
     const patientId = this.$route.params.id;
@@ -236,6 +243,18 @@ export default {
   methods: {
     goToEditPage() {
       this.$router.push(`/patients/${this.$route.params.id}/edit`);
+    },
+    async fetchPatientData() {
+      const patientId = this.$route.params.id;
+      this.loading = true;
+      try {
+        const response = await this.$axios.get(`/api/patients/${patientId}/`);
+        this.patient = response.data;
+      } catch (error) {
+        console.error('Error fetching patient details:', error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };
