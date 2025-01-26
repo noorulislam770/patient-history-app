@@ -26,6 +26,11 @@
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Essential Information</h2>
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
+              <label class="block text-sm font-medium text-gray-700">Pateint ID # </label>
+              <input v-model="patient.id" type="text" readonly
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
+            </div>
+            <div>
               <label class="block text-sm font-medium text-gray-700">Name *</label>
               <input v-model="patient.name" type="text" readonly
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed">
@@ -192,6 +197,7 @@ export default {
   data() {
     return {
       patient: {
+        id: '',
         name: '',
         age: '',
         address: '',
@@ -254,6 +260,15 @@ export default {
         console.error('Error fetching patient details:', error);
       } finally {
         this.loading = false;
+      }
+    },
+    handleSearch(results) {
+      this.patients = results; // Update the patients list with search results
+    },
+    handleEnter() {
+      if (this.patients.length > 0) {
+        const firstPatient = this.patients[0]; // Get the first patient
+        this.$router.push(`/patients/${firstPatient.id}`); // Navigate to the first patient
       }
     },
   },

@@ -3,8 +3,6 @@
     Search Patient
   </button>
   <div>
-    <!-- Button to open the modal -->
-
     <!-- Modal -->
     <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
@@ -17,8 +15,8 @@
         </div>
 
         <!-- Search Input -->
-        <input v-model="searchQuery" type="text" placeholder="Search patients..." class="p-2 border rounded w-full mb-4"
-          @input="handleSearch" />
+        <input ref="searchInput" v-model="searchQuery" type="text" placeholder="Search patients..."
+          class="p-2 border rounded w-full mb-4" @input="handleSearch" @keyup.enter="handleEnter" />
 
         <!-- Loading State -->
         <div v-if="loading" class="text-center">
@@ -47,8 +45,8 @@
                 <td class="py-3 px-4">{{ patient.gender }}</td>
                 <td class="py-3 px-4">{{ patient.mobile_no || 'N/A' }}</td>
                 <td class="py-3 px-4">
-                  <router-link :to="`/patients/${patient.id}`" @click="closeModal"
-                    class="text-blue-500 hover:text-blue-700 transition-colors">
+                  <router-link :to="`/patients/${patient.id}`"
+                    class="text-blue-500 hover:text-blue-700 transition-colors" @click="closeModal">
                     View Details
                   </router-link>
                 </td>
@@ -74,9 +72,12 @@ export default {
     };
   },
   methods: {
-    // Open the modal
+    // Open the modal and focus the search input
     openModal() {
       this.isModalOpen = true;
+      this.$nextTick(() => {
+        this.$refs.searchInput.focus(); // Focus the search input
+      });
     },
     // Close the modal
     closeModal() {
@@ -103,7 +104,15 @@ export default {
       } finally {
         this.loading = false;
       }
-    }, 100), // Debounce for 300ms
+    }, 300), // Debounce for 300ms
+    // Handle Enter key press
+    handleEnter() {
+      if (this.results.length > 0) {
+        const firstPatient = this.results[0]; // Get the first patient
+        this.$router.push(`/patients/${firstPatient.id}`); // Navigate to the first patient
+        this.closeModal(); // Close the modal
+      }
+    },
   },
 };
 </script>
