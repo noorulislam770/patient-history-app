@@ -43,7 +43,7 @@ class Procedure(models.Model):
     patient = models.ForeignKey(
         Patient, on_delete=models.CASCADE, related_name='procedures')
     date = models.DateField()
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
     balance = models.DecimalField(max_digits=10, decimal_places=2)

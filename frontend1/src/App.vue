@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-blue-600 p-4">
+    <nav class="bg-gradient-to-r from-cyan-500 to-blue-500 p-4">
       <div class="container mx-auto flex justify-between items-center">
         <router-link to="/" class="text-white text-xl font-bold">Dot Dentistry - Dental Care</router-link>
         <div class="space-x-4">

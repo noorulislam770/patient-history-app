@@ -1,7 +1,10 @@
 <!-- src/views/ProcedureDetailsView.vue -->
 <template>
-  <div class="container mx-4 px-4 py-8">
-    <h1 class="text-2xl font-bold mb-6">Procedure Details</h1>
+  <div class="container  py-8 rounded-xl max-w-3xl mx-auto shadow-xl shadow-cyan-500/50">
+    <h1
+      class="text-center bg-gradient-to-r rounded-t-xl text-2xl font-semibold text-white from-cyan-500 to-blue-500 p-6">
+      Procedure
+      Details</h1>
     <div v-if="loading" class="text-center">
       <p class="text-xl">Loading procedure details...</p>
     </div>
@@ -10,23 +13,38 @@
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Date</label>
-            <input v-model="form.date" type="date" class="p-2 border rounded w-full" required />
+            <input v-model="form.date" type="date"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"
+              required />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Description</label>
-            <input v-model="form.description" type="text" class="p-2 border rounded w-full" required />
+            <input v-model="form.description" type="text"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"
+              required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Total Amount </label>
+            <input v-model="form.total_amount" type="number"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"
+              required />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Amount Paid</label>
-            <input v-model="form.amount_paid" type="number" class="p-2 border rounded w-full" required />
+            <input v-model="form.amount_paid" type="number"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"
+              required />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Balance</label>
-            <input v-model="form.balance" type="number" class="p-2 border rounded w-full" required />
+            <input v-model="form.balance" type="number"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"
+              required />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Notes</label>
-            <textarea v-model="form.notes" class="p-2 border rounded w-full"></textarea>
+            <textarea v-model="form.notes"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 border pl-2 py-2  focus:ring-blue-500"></textarea>
           </div>
         </div>
         <div class="mt-6">
@@ -49,6 +67,7 @@ export default {
       form: {
         date: '',
         description: '',
+        total_amount: 0,
         amount_paid: 0,
         balance: 0,
         notes: '',

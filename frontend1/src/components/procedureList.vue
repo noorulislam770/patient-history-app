@@ -1,91 +1,112 @@
-<!-- src/components/ProcedureList.vue -->
 <template>
-  <div class="mt-8  shadow-xl shadow-cyan-500/50">
-    <h3 class="text-xl font-bold mb-4">Procedures</h3>
-    <button @click="openAddProcedureModal" class=" mb-4 p-2 bg-blue-500 text-white rounded">
-      Add Procedure
-    </button>
-    <div v-if="loading" class="text-center">
-      <p class="text-xl">Loading procedures...</p>
+  <div class="mt-8 shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center">
+        <h4 class="text-xl font-semibold text-gray-100">Procedures List for <span
+            class="text-2xl text-white capitalize font-bold">{{
+              patientName
+            }}</span>
+        </h4>
+        <button @click="openAddProcedureModal"
+          class="mt-4 lg:mt-0 px-6 py-2 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
+          + Add Procedure
+        </button>
+      </div>
     </div>
-    <div v-else-if="procedures.length === 0" class="text-center">
-      <p class="text-xl">No procedures found.</p>
-    </div>
-    <div v-else class="bg-white shadow-md rounded-lg overflow-hidden">
-      <table class="w-full">
-        <thead>
-          <tr class="bg-gray-100 text-left">
-            <th class="py-3 px-4 font-semibold">ID</th>
-            <th class="py-3 px-4 font-semibold">Date</th>
-            <th class="py-3 px-4 font-semibold">Description</th>
-            <th class="py-3 px-4 font-semibold">Amount</th>
-            <th class="py-3 px-4 font-semibold">Amount Paid</th>
-            <th class="py-3 px-4 font-semibold">Balance</th>
-            <th class="py-3 px-4 font-semibold">View</th>
-            <th class="py-3 px-4 font-semibold">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="procedure in procedures" :key="procedure.id" class="border-t border-gray-200 hover:bg-gray-50">
-            <td class="py-3 px-4">{{ procedure.id }}</td>
-            <td class="py-3 px-4">{{ procedure.date }}</td>
-            <td class="py-3 px-4">{{ procedure.description }}</td>
-            <td class="py-3 px-4">{{ procedure.total_amount }}</td>
-            <td class="py-3 px-4">{{ procedure.amount_paid }}</td>
-            <td class="py-3 px-4">{{ procedure.balance }}</td>
-            <td class="py-3 px-4">
 
-              <router-link :to="`/patients/${patientId}/procedures/${procedure.id}`"
-                class="text-blue-500 hover:text-blue-700 mr-2">
-                View
-              </router-link>
-            </td>
-            <td class="py-3 px-4">
-              <button @click="editProcedure(procedure)" class="text-blue-500 hover:text-blue-700 mr-2">
-                Edit
-              </button>
-              <button @click="deleteProcedure(procedure.id)" class="text-red-500 hover:text-red-700">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="bg-white p-6">
+      <div v-if="loading" class="text-center py-8">
+        <p class="text-xl text-gray-600">Loading procedures...</p>
+      </div>
+      <div v-else-if="procedures.length === 0" class="text-center py-8">
+        <p class="text-xl text-gray-600">No procedures found.</p>
+      </div>
+      <div v-else class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">ID</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Date</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Description</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Amount</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Amount Paid</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Balance</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">View</th>
+              <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600 uppercase">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr v-for="procedure in procedures" :key="procedure.id" class="hover:bg-gray-50 transition duration-150">
+              <td class="py-3 px-4 text-sm text-gray-700">{{ procedure.id }}</td>
+              <td class="py-3 px-4 text-sm text-gray-700">{{ procedure.date }}</td>
+              <td class="py-3 px-4 text-sm text-gray-700">{{ procedure.description }}</td>
+              <td class="py-3 px-4 text-sm text-gray-700">${{ procedure.total_amount }}</td>
+              <td class="py-3 px-4 text-sm text-gray-700">${{ procedure.amount_paid }}</td>
+              <td class="py-3 px-4 text-sm text-gray-700">${{ procedure.balance }}</td>
+              <td class="py-3 px-4">
+                <router-link :to="`/patients/${patientId}/procedures/${procedure.id}`"
+                  class="text-blue-500 hover:text-blue-700 transition duration-150">
+                  View
+                </router-link>
+              </td>
+              <td class="py-3 px-4">
+                <button @click="editProcedure(procedure)"
+                  class="text-blue-500 hover:text-blue-700 mr-2 transition duration-150">
+                  Edit
+                </button>
+                <button @click="deleteProcedure(procedure.id)"
+                  class="text-red-500 hover:text-red-700 transition duration-150">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Add/Edit Procedure Modal -->
-    <div v-if="isModalOpen" style="z-index: 1;"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-bold">{{ isEditing ? 'Edit Procedure' : 'Add Procedure' }} </h2>
-          <button @click="closeModal" class="text-gray-500 hover:text-gray-700">
+    <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl overflow-hidden">
+        <div class="flex justify-between text-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
+          <h2 class="text-xl font-bold text-center text-white">{{ isEditing ? 'Edit Procedure' : 'Add Procedure' }}</h2>
+          <button @click="closeModal" class="text-white hover:text-gray-200 transition duration-150">
             &times;
           </button>
         </div>
-        <p class="text-gray-600 block">for patient <b class="uppercase">{{ patientName }}</b> </p>
-        <form @submit.prevent="submitForm">
-          <div class="space-y-4">
-            <input v-model="form.date" type="date" placeholder="Date" class="p-2 border rounded w-full" required />
-            <input v-model="form.description" ref="descriptionInput" type="text" placeholder="Description"
-              class="p-2 border rounded w-full" required />
-            <input v-model="form.total_amount" type="number" placeholder="Total Amount"
-              class="p-2 border rounded w-full" required @input="updateBalance" />
-            <input v-model="form.amount_paid" type="number" placeholder="Amount Paid" class="p-2 border rounded w-full"
-              required @input="updateBalance" />
-            <input v-model="form.balance" type="number" placeholder="Balance" class="p-2 border rounded w-full"
-              readonly />
-            <textarea v-model="form.notes" placeholder="Notes" class="p-2 border rounded w-full"></textarea>
-          </div>
-          <div class="mt-6">
-            <button type="submit" class="p-2 bg-blue-500 text-white rounded">
-              {{ isEditing ? 'Update' : 'Add' }}
-            </button>
-            <button @click="closeModal" type="button" class="p-2 bg-gray-500 text-white rounded ml-2">
-              Cancel
-            </button>
-          </div>
-        </form>
+        <div class="p-6">
+          <p class="text-gray-600 mb-4">For patient <b class="uppercase">{{ patientName }}</b></p>
+          <form @submit.prevent="submitForm">
+            <div class="space-y-4">
+              <input v-model="form.date" type="date" placeholder="Date"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                required />
+              <input v-model="form.description" ref="descriptionInput" type="text" placeholder="Description"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                required />
+              <input v-model="form.total_amount" type="number" placeholder="Total Amount"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                required @input="updateBalance" />
+              <input v-model="form.amount_paid" type="number" placeholder="Amount Paid"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                required @input="updateBalance" />
+              <input v-model="form.balance" type="number" placeholder="Balance"
+                class="p-2 border rounded w-full bg-gray-100" readonly />
+              <textarea v-model="form.notes" placeholder="Notes"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <div class="mt-6 flex justify-end">
+              <button type="submit"
+                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150">
+                {{ isEditing ? 'Update' : 'Add' }}
+              </button>
+              <button @click="closeModal" type="button"
+                class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 ml-2 transition duration-150">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -121,11 +142,11 @@ export default {
     };
   },
   async created() {
-    console.log("patientId : ", this.patientId); await this.fetchProcedures();
+    await this.fetchProcedures();
   },
   watch: {
     patientId: {
-      immediate: true, // Trigger the watcher immediately
+      immediate: true,
       handler(newPatientId) {
         if (newPatientId) {
           this.fetchProcedures();
@@ -136,9 +157,7 @@ export default {
   methods: {
     async fetchProcedures() {
       this.loading = true;
-      console.log("patientId : ", this.patientId);
       try {
-
         const response = await this.$axios.get(`/api/procedures/?patient_id=${this.patientId}`);
         this.procedures = response.data;
       } catch (error) {
@@ -151,17 +170,16 @@ export default {
       this.isEditing = false;
       this.form = {
         id: null,
-        date: new Date().toISOString().split('T')[0], // Set today's date
+        date: new Date().toISOString().split('T')[0],
         description: '',
         total_amount: 0,
         amount_paid: 0,
         balance: 0,
         notes: '',
       };
-
       this.isModalOpen = true;
       this.$nextTick(() => {
-        this.$refs.descriptionInput.focus(); // Focus the description input
+        this.$refs.descriptionInput.focus();
       });
     },
     editProcedure(procedure) {
@@ -169,7 +187,7 @@ export default {
       this.form = { ...procedure };
       this.isModalOpen = true;
       this.$nextTick(() => {
-        this.$refs.descriptionInput.focus(); // Focus the description input
+        this.$refs.descriptionInput.focus();
       });
     },
     async submitForm() {
@@ -208,3 +226,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Add any custom styles here */
+</style>

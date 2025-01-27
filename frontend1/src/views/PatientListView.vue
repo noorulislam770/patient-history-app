@@ -1,7 +1,10 @@
 <template>
-  <div class="container shadow-xl shadow-cyan-500/50 py-8 max-w-5xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800">Patient List</h2>
-    <SearchBar @search="handleSearch" class="mb-8" /> <!-- Listen for the search event -->
+  <div class="container shadow-xl shadow-cyan-500/50 rounded-xl  mt-4 max-w-5xl mx-auto">
+    <div class="text-center bg-gradient-to-r rounded-t-xl from-cyan-500 to-blue-500 pt-3 pb-1 ">
+      <h2 class="text-3xl font-semibold text-white  mb-4 text-gray-800">Patient List</h2>
+    </div>
+    <SearchBar class="mx-2 border-2 border-gray-400 rounded-lg mt-2 " @search="handleSearch" />
+    <!-- Listen for the search event -->
 
     <div v-if="loading" class="text-center py-12">
       <p class="text-xl text-gray-600">Loading patients...</p>

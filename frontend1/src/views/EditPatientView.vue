@@ -2,11 +2,11 @@
   <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <!-- Header -->
-      <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2 inline-block">
-          DENTISTRY
+      <div class="text-center mb- 8 text-center bg-gradient-to-r rounded-t-xl from-cyan-500 to-blue-500 p-6">
+        <h1 class="text-3xl font-bold text-white  inline-block">
+          Dot Dentistry - Dental Care
         </h1>
-        <p class="mt-2 text-sm text-gray-600">Edit Patient Information</p>
+        <p class="mt-2 text-lg font-light tracking-wider leading-loose text-white">Edit Patient Information</p>
       </div>
 
       <!-- Form -->
