@@ -35,7 +35,7 @@ export default {
       } finally {
         this.loading = false;
       }
-    }, 300), // Debounce for 300ms
+    }, 50), // Debounce for 300ms
     // Handle Enter key press
 
   },

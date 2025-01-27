@@ -14,10 +14,10 @@
       <p class="text-xl text-gray-600">No patients found.</p>
     </div>
 
-    <div v-else class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div v-else class="bg-white shadow-lg  overflow-hidden">
       <table class="w-full">
         <thead>
-          <tr class="bg-gray-50 text-left text-gray-700">
+          <tr class="bg-gray-300 text-left text-gray-700">
             <th class="py-4 px-6 font-semibold uppercase text-sm">ID</th>
             <th class="py-4 px-6 font-semibold uppercase text-sm">Name</th>
             <th class="py-4 px-6 font-semibold uppercase text-sm">Entry Date</th>
@@ -29,14 +29,14 @@
         </thead>
         <tbody>
           <tr v-for="patient in patients" :key="patient.id"
-            class="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            class="border-t border-gray-100 hover:bg-gray-300 transition-colors duration-150 ">
 
             <td class="py-4 px-6 text-gray-800">{{ patient.id }}</td>
-            <td class="py-4 px-6 text-gray-800">{{ patient.name }}</td>
+            <td class="py-4 px-6 text-gray-800 capitalize">{{ patient.name }}</td>
             <td class="py-4 px-6 text-gray-800">{{ patient.entry_date }}</td>
             <td class="py-4 px-6 text-gray-700">{{ patient.mobile_no || 'N/A' }}</td>
             <td class="py-4 px-6 text-gray-700">{{ patient.age }}</td>
-            <td class="py-4 px-6 text-gray-700">{{ patient.gender }}</td>
+            <td class="py-4 px-6 text-gray-700 capitalize">{{ patient.gender }}</td>
             <td class="py-4 px-6">
               <router-link :to="`/patients/${patient.id}`"
                 class="text-blue-500 hover:text-blue-700 transition-colors font-semibold">

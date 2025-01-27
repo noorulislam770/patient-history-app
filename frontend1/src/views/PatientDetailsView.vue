@@ -10,7 +10,7 @@
       <!-- Patient Details Section (1/3 width) -->
       <div class="lg:col-span-3 mt-2">
         <!-- Patient Details Card -->
-        <div class="bg-white shadow-xl shadow-cyan-500/50 shadow-lg rounded-xl py-6 sticky top-8">
+        <div class="bg-white shadow-xl shadow-cyan-500/50 shadow-lg rounded-xl mt-6 pb-4 sticky top-8">
           <!-- Header -->
           <div class="text-center bg-gradient-to-r rounded-t-xl from-cyan-500 to-blue-500 p-6">
             <h1 class="text-xl font-semibold text-white pb-3 inline-block">
@@ -53,7 +53,7 @@
                 </div>
                 <div>
                   <p class="text-xs font-medium text-gray-600 mb-1">Email</p>
-                  <h3 class="text-lg capitalize">{{ patient.email }}</h3>
+                  <h3 class="text-lg">{{ patient.email }}</h3>
                 </div>
                 <div>
                   <p class="text-xs font-medium text-gray-600 capalize mb-1">Address</p>
@@ -83,9 +83,9 @@
 
               <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">Dental History</h2>
               <div class="space-y-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div>
+                <div class="col-span-2">
                   <p class="text-sm font-medium text-gray-600 mb-1">Current dental concerns</p>
-                  <p class="text-xl whitespace-pre-line">{{ patient.dental_concerns }}</p>
+                  <p class="text-md font-semibold whitespace-pre-line">{{ patient.dental_concerns }}</p>
                 </div>
                 <div>
                   <p class="text-sm font-medium text-gray-600 mb-1">Last dental examination</p>
@@ -95,9 +95,9 @@
                   <p class="text-sm font-medium text-gray-600 mb-1">Last dental X-ray</p>
                   <h3 class="text-xl">{{ patient.last_dental_xray }}</h3>
                 </div>
-                <div>
+                <div class="col-span-2">
                   <p class="text-sm font-medium text-gray-600 mb-1">Discomfort or Pain</p>
-                  <h3 class="text-xl">{{ patient.discomfort_of_pain }}</h3>
+                  <h3 class="text-md font-semibold  whitespace-pre-line">{{ patient.discomfort_of_pain }}</h3>
                 </div>
               </div>
             </div>
@@ -115,12 +115,12 @@
                     <h3 class="text-xl">{{ patient.medications }}</h3>
                   </div>
                   <div>
-                    <p class="text-sm font-medium text-gray-600 mb-1">Allergies</p>
-                    <p class="text-xl">{{ patient.allergies }}</p>
-                  </div>
-                  <div>
                     <p class="text-sm font-medium text-gray-600 mb-1">Physician Name</p>
                     <h3 class="text-xl">{{ patient.physician_name }}</h3>
+                  </div>
+                  <div class="col-span-2">
+                    <p class="text-sm font-medium text-gray-600 mb-1">Allergies</p>
+                    <p class="text-md font-semibold whitespace-pre-line">{{ patient.allergies }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-600 mb-1">Other Medical Problems</p>
@@ -172,6 +172,10 @@
             </div>
           </div>
         </div>
+
+
+
+
       </div>
     </div>
   </div>

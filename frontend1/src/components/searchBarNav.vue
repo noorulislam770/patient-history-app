@@ -1,12 +1,13 @@
 <template>
-  <button @click="openModal" class="text-white hover:text-gray-200 border border-gray-200 p-2 rounded">
+  <button @click="openModal"
+    class="text-white text-lg text-light tracking-wide leading-loose font-semibold hover:text-gray-300">
     Search Patient
   </button>
   <div>
     <!-- Modal -->
     <div v-if="isModalOpen" style="z-index: 1;"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" @click="handleOverlayClick">
+      <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6" @click.stop>
         <!-- Modal Header -->
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-xl font-bold">Search Patients</h2>
@@ -66,27 +67,30 @@ import { useDebounceFn } from '@vueuse/core';
 export default {
   data() {
     return {
-      isModalOpen: false, // Controls the modal visibility
-      searchQuery: '', // Search query
-      results: [], // Search results
-      loading: false, // Loading state
+      isModalOpen: false,
+      searchQuery: '',
+      results: [],
+      loading: false,
     };
   },
   methods: {
-    // Open the modal and focus the search input
     openModal() {
       this.isModalOpen = true;
       this.$nextTick(() => {
-        this.$refs.searchInput.focus(); // Focus the search input
+        this.$refs.searchInput.focus();
       });
     },
-    // Close the modal
     closeModal() {
       this.isModalOpen = false;
-      this.searchQuery = ''; // Clear the search query
-      this.results = []; // Clear the search results
+      this.searchQuery = '';
+      this.results = [];
     },
-    // Handle search with debouncing
+    handleOverlayClick(event) {
+      // Close modal when clicking the overlay
+      if (event.target === event.currentTarget) {
+        this.closeModal();
+      }
+    },
     handleSearch: useDebounceFn(async function () {
       if (this.searchQuery.trim() === '') {
         this.results = [];
@@ -105,19 +109,14 @@ export default {
       } finally {
         this.loading = false;
       }
-    }, 300), // Debounce for 300ms
-    // Handle Enter key press
+    }, 300),
     handleEnter() {
       if (this.results.length > 0) {
-        const firstPatient = this.results[0]; // Get the first patient
-        this.$router.push(`/patients/${firstPatient.id}`); // Navigate to the first patient
-        this.closeModal(); // Close the modal
+        const firstPatient = this.results[0];
+        this.$router.push(`/patients/${firstPatient.id}`);
+        this.closeModal();
       }
     },
   },
 };
 </script>
-
-<style scoped>
-/* Add custom styles if needed */
-</style>

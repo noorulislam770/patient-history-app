@@ -78,22 +78,29 @@
           <p class="text-gray-600 mb-4">For patient <b class="uppercase">{{ patientName }}</b></p>
           <form @submit.prevent="submitForm">
             <div class="space-y-4">
-              <input v-model="form.date" type="date" placeholder="Date"
-                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+              <label for="date" class="mb-0 text-md font-light text-gray-900">procedure date</label>
+              <input v-model="form.date" type="date" placeholder="Date" style="margin-top: 2px"
+                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required />
+              <label for="description" class="mb-0 text-md font-light text-gray-900">Description</label>
               <input v-model="form.description" ref="descriptionInput" type="text" placeholder="Description"
-                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                style="margin-top: 2px"
+                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required />
-              <input v-model="form.total_amount" type="number" placeholder="Total Amount"
-                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+              <label for="total_amount" class="mb-0 text-md font-light text-gray-900">Total Amount</label>
+              <input v-model="form.total_amount" type="number" placeholder="Total Amount" style="margin-top: 2px"
+                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required @input="updateBalance" />
-              <input v-model="form.amount_paid" type="number" placeholder="Amount Paid"
-                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+              <label for="amount_paid" class="mb-0 text-md font-light text-gray-900">Amount Paid</label>
+              <input v-model="form.amount_paid" type="number" placeholder="Amount Paid" style="margin-top: 2px"
+                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required @input="updateBalance" />
-              <input v-model="form.balance" type="number" placeholder="Balance"
-                class="p-2 border rounded w-full bg-gray-100" readonly />
-              <textarea v-model="form.notes" placeholder="Notes"
-                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"></textarea>
+              <label for="balance" class="mb-0 text-md font-light text-gray-900">Balance</label>
+              <input v-model="form.balance" type="number" placeholder="Balance" style="margin-top: 2px"
+                class="p-2 border rounded  w-full bg-gray-100" readonly />
+              <label for="notes" class="mb-0 text-md font-light text-gray-900">Notes</label>
+              <textarea v-model="form.notes" placeholder="Notes" style="margin-top: 2px"
+                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"></textarea>
             </div>
             <div class="mt-6 flex justify-end">
               <button type="submit"

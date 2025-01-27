@@ -1,6 +1,6 @@
 <!-- src/views/ProcedureDetailsView.vue -->
 <template>
-  <div class="container  py-8 rounded-xl max-w-3xl mx-auto shadow-xl shadow-cyan-500/50">
+  <div class="container  my-4 rounded-xl max-w-3xl mx-auto shadow-xl shadow-cyan-500/50">
     <h1
       class="text-center bg-gradient-to-r rounded-t-xl text-2xl font-semibold text-white from-cyan-500 to-blue-500 p-6">
       Procedure
@@ -64,6 +64,7 @@
 export default {
   data() {
     return {
+
       form: {
         date: '',
         description: '',
@@ -71,6 +72,7 @@ export default {
         amount_paid: 0,
         balance: 0,
         notes: '',
+
       },
       loading: true,
       patientId: null,
