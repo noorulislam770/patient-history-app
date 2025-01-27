@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-8 py-8">
+  <div class="container shadow-xl shadow-cyan-500/50 py-8 max-w-5xl mx-auto">
     <h2 class="text-3xl font-bold mb-8 text-gray-800">Patient List</h2>
     <SearchBar @search="handleSearch" class="mb-8" /> <!-- Listen for the search event -->
 

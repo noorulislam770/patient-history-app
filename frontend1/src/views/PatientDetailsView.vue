@@ -10,9 +10,9 @@
       <!-- Patient Details Section (1/3 width) -->
       <div class="lg:col-span-1 ">
         <!-- Patient Details Card -->
-        <div class="bg-white shadow-lg rounded-xl p-6 sticky top-8">
+        <div class="bg-white  shadow-xl shadow-cyan-500/50 shadow-lg rounded-xl p-6 sticky top-8">
           <!-- Header -->
-          <div class="text-center mb-6">
+          <div class="text-center  mb-6">
             <h1 class="text-2xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2 inline-block">
               Patient Details
             </h1>

@@ -1,16 +1,16 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-gray-50   py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2 inline-block">
-          DENTISTRY
+          Dot Dentistry - Dental Care
         </h1>
         <h2 class="mt-2 text-md text-gray-600">Patient Entry Form</h2>
       </div>
 
       <!-- Form -->
-      <form @submit.prevent="handleSubmit" class="space-y-6">
+      <form @submit.prevent="handleSubmit" class="space-y-6 pb-4  shadow-xl shadow-cyan-500/50">
         <!-- Essential Information Card -->
         <div class="bg-white shadow rounded-lg p-6">
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mb-2">

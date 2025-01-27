@@ -1,8 +1,8 @@
 <!-- src/components/ProcedureList.vue -->
 <template>
-  <div class="mt-8">
+  <div class="mt-8  shadow-xl shadow-cyan-500/50">
     <h3 class="text-xl font-bold mb-4">Procedures</h3>
-    <button @click="openAddProcedureModal" class="mb-4 p-2 bg-blue-500 text-white rounded">
+    <button @click="openAddProcedureModal" class=" mb-4 p-2 bg-blue-500 text-white rounded">
       Add Procedure
     </button>
     <div v-if="loading" class="text-center">
