@@ -85,6 +85,7 @@ export default {
     async fetchProcedure() {
       const procedureId = this.$route.params.procedureId;
       console.log(procedureId);
+      console.log("procedureId : ", procedureId)
       try {
         const response = await this.$axios.get(`/api/procedures/${procedureId}/`);
         this.form = response.data;

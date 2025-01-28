@@ -1,7 +1,8 @@
 <template>
   <div class="mb-4">
-    <input ref="searchInput" v-model="searchQuery" type="text" placeholder="Search patients..."
-      class="p-2 border rounded w-full" @input="handleSearch" @keyup.enter="handleEnter" />
+    <input ref="searchInput" v-model="searchQuery" type="text"
+      placeholder="Search patients ... by , id name phone or email" class="p-2 border rounded w-full"
+      @input="handleSearch" @keyup.enter="handleEnter" />
     <div v-if="loading" class="text-center mt-4">Loading...</div>
   </div>
 </template>

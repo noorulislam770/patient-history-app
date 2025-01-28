@@ -1,7 +1,7 @@
 <template>
   <button @click="openModal"
     class="text-white text-lg text-light tracking-wide leading-loose font-semibold hover:text-gray-300">
-    Search Patient
+    Search Patient 🔎
   </button>
   <div>
     <!-- Modal -->
@@ -10,7 +10,7 @@
       <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6" @click.stop>
         <!-- Modal Header -->
         <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-bold">Search Patients</h2>
+          <h2 class="text-xl font-bold">Search Patients </h2>
           <button @click="closeModal" class="text-gray-500 hover:text-gray-700">
             &times;
           </button>
@@ -33,6 +33,7 @@
           <table class="w-full">
             <thead>
               <tr class="bg-gray-100 text-left">
+                <th class="py-3 px-4 font-semibold">ID</th>
                 <th class="py-3 px-4 font-semibold">Name</th>
                 <th class="py-3 px-4 font-semibold">Age</th>
                 <th class="py-3 px-4 font-semibold">Gender</th>
@@ -42,6 +43,7 @@
             </thead>
             <tbody>
               <tr v-for="patient in results" :key="patient.id" class="border-t border-gray-200 hover:bg-gray-50">
+                <td class="py-3 px-4">{{ patient.id }}</td>
                 <td class="py-3 px-4">{{ patient.name }}</td>
                 <td class="py-3 px-4">{{ patient.age }}</td>
                 <td class="py-3 px-4">{{ patient.gender }}</td>

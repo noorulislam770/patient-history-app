@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-8 gap-4 mx-8">
       <!-- Procedures Section (2/3 width) -->
       <div class="lg:col-span-5">
-        <ProcedureList :patientId="patient.id" :patientName="patient.name" />
+        <ProcedureList v-if="patient.id" :patientId="patient.id" :patientName="patient.name" />
       </div>
 
       <!-- Patient Details Section (1/3 width) -->

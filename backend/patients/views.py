@@ -1,6 +1,7 @@
 # patients/views.py
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from django.db.models import Q
 from rest_framework.views import APIView
 from .models import Patient, Procedure, Appointment
 from .serializers import PatientSerializer, AppointmentSerializer, ProcedureSerializer
@@ -41,12 +42,25 @@ class PatientUpdateView(APIView):
 class PatientSearchView(APIView):
     def get(self, request):
         # Get the search query from the URL
-        query = request.query_params.get('query', '')
+        query = request.query_params.get('query', '').strip()
+
         if query:
-            patients = Patient.objects.filter(
-                name__icontains=query)  # Case-insensitive search
+            # Check if the query is numeric (could be ID or mobile number)
+            if query.isdigit():
+                # Search for ID or mobile number
+                patients = Patient.objects.filter(
+                    Q(id=query) | Q(mobile_no__icontains=query)
+                )
+            else:
+                # Search for name or email (non-numeric query)
+                patients = Patient.objects.filter(
+                    Q(name__icontains=query) | Q(email__icontains=query)
+                )
         else:
-            patients = Patient.objects.all()  # Return all patients if no query is provided
+            # Return all patients if no query is provided
+            patients = Patient.objects.all()
+
+        # Serialize the queryset
         serializer = PatientSerializer(patients, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -54,6 +68,10 @@ class PatientSearchView(APIView):
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+    def get_queryset(self):
+        pateints = Patient.objects.all().order_by('-entry_date')
+        return pateints
 
 
 class AppointmentViewSet(viewsets.ModelViewSet):
@@ -68,8 +86,8 @@ class ProcedureViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         patient_id = self.request.query_params.get('patient_id')
         if patient_id:
-            patient = Patient.objects.get(id=patient_id)
-            procedure = Procedure.objects.filter(patient_id=patient_id)
+            procedure = Procedure.objects.filter(
+                patient_id=patient_id).order_by('-date')
             # print(procedure)
             return procedure
         elif not patient_id:

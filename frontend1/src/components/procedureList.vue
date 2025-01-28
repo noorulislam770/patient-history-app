@@ -3,9 +3,7 @@
     <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
       <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center">
         <h4 class="text-xl font-semibold text-gray-100">Procedures List for <span
-            class="text-2xl text-white capitalize font-bold">{{
-              patientName
-            }}</span>
+            class="text-2xl text-white capitalize font-bold">{{ patientName }}</span>
         </h4>
         <button @click="openAddProcedureModal"
           class="mt-4 lg:mt-0 px-6 py-2 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
@@ -62,6 +60,24 @@
             </tr>
           </tbody>
         </table>
+
+        <!-- Pagination Controls -->
+        <div class="flex justify-between items-center px-4 py-4 bg-gray-50 mt-4">
+          <div class="text-sm text-gray-600">
+            Showing {{ currentPage * pageSize - pageSize + 1 }} to
+            {{ Math.min(currentPage * pageSize, totalItems) }} of {{ totalItems }} procedures
+          </div>
+          <div class="flex space-x-2">
+            <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1"
+              class="px-4 py-2 border rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              Previous
+            </button>
+            <button @click="changePage(currentPage + 1)" :disabled="currentPage >= totalPages"
+              class="px-4 py-2 border rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -80,27 +96,27 @@
             <div class="space-y-4">
               <label for="date" class="mb-0 text-md font-light text-gray-900">procedure date</label>
               <input v-model="form.date" type="date" placeholder="Date" style="margin-top: 2px"
-                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required />
               <label for="description" class="mb-0 text-md font-light text-gray-900">Description</label>
               <input v-model="form.description" ref="descriptionInput" type="text" placeholder="Description"
                 style="margin-top: 2px"
-                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required />
               <label for="total_amount" class="mb-0 text-md font-light text-gray-900">Total Amount</label>
               <input v-model="form.total_amount" type="number" placeholder="Total Amount" style="margin-top: 2px"
-                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required @input="updateBalance" />
               <label for="amount_paid" class="mb-0 text-md font-light text-gray-900">Amount Paid</label>
               <input v-model="form.amount_paid" type="number" placeholder="Amount Paid" style="margin-top: 2px"
-                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"
                 required @input="updateBalance" />
               <label for="balance" class="mb-0 text-md font-light text-gray-900">Balance</label>
               <input v-model="form.balance" type="number" placeholder="Balance" style="margin-top: 2px"
-                class="p-2 border rounded  w-full bg-gray-100" readonly />
+                class="p-2 border rounded w-full bg-gray-100" readonly />
               <label for="notes" class="mb-0 text-md font-light text-gray-900">Notes</label>
               <textarea v-model="form.notes" placeholder="Notes" style="margin-top: 2px"
-                class="p-2 border rounded  w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"></textarea>
+                class="p-2 border rounded w-full focus:outline-none border-gray-400 focus:ring-2 focus:ring-blue-500"></textarea>
             </div>
             <div class="mt-6 flex justify-end">
               <button type="submit"
@@ -137,6 +153,11 @@ export default {
       loading: true,
       isModalOpen: false,
       isEditing: false,
+      // Pagination data
+      currentPage: 1,
+      pageSize: 10,
+      totalItems: 0,
+      totalPages: 1,
       form: {
         id: null,
         date: '',
@@ -156,6 +177,7 @@ export default {
       immediate: true,
       handler(newPatientId) {
         if (newPatientId) {
+          this.currentPage = 1; // Reset to first page when patient changes
           this.fetchProcedures();
         }
       },
@@ -165,12 +187,26 @@ export default {
     async fetchProcedures() {
       this.loading = true;
       try {
-        const response = await this.$axios.get(`/api/procedures/?patient_id=${this.patientId}`);
-        this.procedures = response.data;
+        const response = await this.$axios.get(`/api/procedures/`, {
+          params: {
+            patient_id: this.patientId,
+            page: this.currentPage,
+          },
+        });
+        // Handle paginated response
+        this.procedures = response.data.results;
+        this.totalItems = response.data.count;
+        this.totalPages = Math.ceil(response.data.count / this.pageSize);
       } catch (error) {
         console.error('Error fetching procedures:', error);
       } finally {
         this.loading = false;
+      }
+    },
+    async changePage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        await this.fetchProcedures();
       }
     },
     openAddProcedureModal() {
@@ -218,6 +254,10 @@ export default {
       if (confirm('Are you sure you want to delete this procedure?')) {
         try {
           await this.$axios.delete(`/api/procedures/${procedureId}/`);
+          // Refetch current page, or go to previous page if this was the last item
+          if (this.procedures.length === 1 && this.currentPage > 1) {
+            this.currentPage--;
+          }
           await this.fetchProcedures();
         } catch (error) {
           console.error('Error deleting procedure:', error);
@@ -233,7 +273,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add any custom styles here */
-</style>
