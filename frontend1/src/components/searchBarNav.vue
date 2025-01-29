@@ -80,12 +80,14 @@ export default {
       this.isModalOpen = true;
       this.$nextTick(() => {
         this.$refs.searchInput.focus();
+        window.addEventListener('keydown', this.handleKeydown);
       });
     },
     closeModal() {
       this.isModalOpen = false;
       this.searchQuery = '';
       this.results = [];
+      window.removeEventListener('keydown', this.handleKeydown);
     },
     handleOverlayClick(event) {
       // Close modal when clicking the overlay
@@ -116,6 +118,11 @@ export default {
       if (this.results.length > 0) {
         const firstPatient = this.results[0];
         this.$router.push(`/patients/${firstPatient.id}`);
+        this.closeModal();
+      }
+    },
+    handleKeydown(event) {
+      if (event.key === 'Escape') {
         this.closeModal();
       }
     },
