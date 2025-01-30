@@ -5,7 +5,7 @@ import PatientListView from '../views/PatientListView.vue'
 import AddPatientView from '../views/AddPatientView.vue'
 import EditPatientView from '../views/EditPatientView.vue'
 import PatientDetailsView from '../views/PatientDetailsView.vue'
-import ProcedureDetailsView from '../views/ProcedureDetailsView.vue'
+import ProcedureDetailsView from '../views/procedureDetailsView.vue'
 
 const routes = [
   {

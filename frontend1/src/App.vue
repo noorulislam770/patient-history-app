@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import SearchBarNav from './components/SearchBarNav.vue';
+import SearchBarNav from './components/searchBarNav.vue';
 
 export default {
   components: {
