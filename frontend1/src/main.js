@@ -7,7 +7,7 @@ import './assets/tailwind.css'
 const app = createApp(App)
 
 app.config.globalProperties.$axios = axios.create({
-  baseURL: 'http://127.0.0.1:8000', // Django backend URL
+  baseURL: "https://patient-history-app.onrender.com/", // Django backend URL
 })
 
 app.use(router)
