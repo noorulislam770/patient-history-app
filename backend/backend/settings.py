@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-&f_63(&w!$$-vcfxr89vy0)^7%u1n()!b&ayl6vsyjg!_*9+z#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost:5173", "*"]
+ALLOWED_HOSTS = [
+    "https://patient-history-app.onrender.com", "localhost:5173", "*"
+]
 
 
 # Application definition
